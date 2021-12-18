@@ -265,3 +265,76 @@ CREATE TABLE Teacher2(
     # Salary field has no constraint, so it could be blank
     PRIMARY KEY(ID) # Now specifing the ID column as primary key
 );
+
+
+                                                            # insert some value to teacher table
+INSERT INTO teacher
+      (ID, NAME, Salary)
+VALUES
+      (1000, 'Rahim', 35000),
+      (1001, 'Rahim', 60000),
+      (1002, 'Rahim', 67000),
+      (1003, 'Rahim', Null),
+      (1004, 'Rahim', 45000),
+      (1005, 'Rahim', 44000),
+
+
+
+################################## # Update statement: update the Null value 
+
+UPDATE
+    teacher                               # update into teacher table
+SET
+    Salary = 90000                        # Salary will be set to 90000
+WHERE
+    id = 1006;                            # where id = 1006
+
+
+
+                                          # update--> increase salary 10%
+UPDATE
+    teacher                               # update into teacher table
+SET
+    Salary = Salary+ Salary * 0.1                 # Salary will be increased by 10%
+WHERE
+    id > 1005;                            # where id > 1005
+
+
+
+
+DELETE
+    teacher                               # delete row in teacher table
+WHERE
+    id = 1006;                            # where id = 1006
+
+
+DELETE
+    teacher                               # Delete row in teacher table
+WHERE
+    id > 1006;                            # if id > 1006
+
+
+                                          # UPPER / lower
+SELECT *,                                 # show all column
+UPPER(Name) as CAPname                    # convert the names into BLOCK letters and re-name the column as 'CAPname'
+FROM teacher;                             # from teacher table
+
+
+
+
+                                          #CONCAT = concatanation key word, used to concat the strings
+                                          #For EXAMPLE lets say we have a 'student_details' table.
+                                          #With columns: Roll, Name, Age.
+                                          #Now we need to make a string structure and show as a column with other column. 
+                                          #string structure: Student 'Name' is 'Age' years old.  
+SELECT
+    *,                                     # Show all column
+    CONCAT(
+        'Student',
+        NAME,
+        'is',
+        Age,
+        ' years old.'
+    ) AS strNEW               # Naming that column as strNEW
+FROM
+    student_details;
