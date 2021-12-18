@@ -216,3 +216,118 @@ WHERE Age >18;                                       # if Gender > 18
 SELECT * FROM student_details                       # Show All the columns from student_details table
 WHERE Age >18 and City='dhaka';                     # if ((Age>18) AND (City = 'Dhaka') 
 ```
+## BETWEEN key WORD
+```
+SELECT * FROM student_details                       # Show All the columns from student_details table
+WHERE Age BETWEEN 18 and 21;                        # if ((Age>=18) AND (Age<=21) 
+```
+## NOT BETWEEN key WORD
+```
+SELECT * FROM student_details                       # Show All the columns from student_details table
+WHERE Age NOT BETWEEN 18 and 21;                        # if ((Age>=18) AND (Age<=21) 
+```
+
+
+## Where clauser with AND,OR
+```
+SELECT * FROM student_details                       # Show All the columns from student_details table
+WHERE Age >18 and City='dhaka';                     # if ((Age>18) AND (City = 'Dhaka') 
+
+SELECT * FROM student_details                       # Show All the columns from student_details table
+WHERE Age >18 OR City='dhaka';                     # if ((Age>18) OR (City = 'Dhaka') 
+```
+
+## Where clauser with 'IN' key word or 'IN' operator
+```
+                                                             # IN key word
+SELECT                                                            
+    City,Name ,Age                                           # Show City,Name ,Age columns
+FROM
+    student_details                                          # from student_details table 
+WHERE
+    City IN ('ctg','Dhaka','khulna')                # if City = 'ctg' OR City ='Dhaka' OR City= 'khulna'
+ORDER BY                                                                
+    Age;                                                     # Sort by Age, assendring Order
+
+```
+
+## Where clauser with 'NOT IN' key word or 'NOT IN' operator
+```
+                                                             # IN key word
+SELECT                                                            
+    City,Name ,Age                                           # Show City,Name ,Age columns
+FROM
+    student_details                                          # from student_details table 
+WHERE
+    City NOT IN ('ctg','Dhaka','khulna')        # if City != 'ctg' OR City !='Dhaka' OR City != 'khulna'
+ORDER BY                                                                
+    Age;                                                     # Sort by Age, assendring Order
+
+```
+
+## LIKE 
+'_' = under_score, means 1 charecter could be anything 
+'%' = any number of charecter could be anything
+```
+SELECT                                                            
+    City,Name ,Age                                           # Show City,Name ,Age columns
+FROM
+    student_details                                          # from student_details table 
+WHERE
+      Name LIKE 'R%'                 # if the name starts with 'R' , '%' means anything after
+ORDER BY                                                                
+    Age;                                                     # Sort by Age, assendring Order
+
+```
+### example 2
+```
+SELECT                                                            
+    City, Name ,Age                                           # Show City,Name ,Age columns
+FROM
+    student_details                                          # from student_details table 
+WHERE
+      Name LIKE 'R%2'             # if the name starts with 'R' Ends with '2' , '%' means anything middle
+ORDER BY                                                                
+    Age;                                                     # Sort by Age, assendring Order
+```
+### example 3
+```
+SELECT                                                            
+    City, Name ,Age                                           # Show City,Name ,Age columns
+FROM
+    student_details                                          # from student_details table 
+WHERE
+      Name LIKE '%ar%'                            # if the name contains 'ar' , '%' means anything after or before
+ORDER BY                                                                
+    Age;                                                     # Sort by Age, assendring Order
+```
+
+### example 4 with '_'
+```
+
+SELECT
+    City,
+    NAME,
+    Age                                               # Show City,Name ,Age columns
+FROM
+    student_details                                   # from student_details table 
+WHERE NAME LIKE
+    '__rg%'   # Specificly 1st two-charecters could be anything, 3rd and 4th charecter must be 'rg' , '%' means anything after
+ORDER BY
+    Age; # Sort by Age, assendring Order
+```
+
+
+### example 5 with '_'
+```
+SELECT
+    City,
+    NAME,
+    Age                                   # Show City,Name ,Age columns
+FROM
+    student_details                       # from student_details table 
+WHERE NAME LIKE
+    '%n_'                               # Specificly 2nd last charecter must be 'n'.
+ORDER BY
+    Age;                                  # Sort by Age, assendring Order
+```
