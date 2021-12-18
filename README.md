@@ -45,14 +45,14 @@ CREATE TABLE <Table name>(
 )
 ```
 
-Example: create table of student.
+### Example: create table of student.
 ```
 Create table student (
 s_id varchar(20),
 i_id varchar(20),
-constraint pk_IDs_ primary key(s_id),
-foreign key (s_id) references student,
-foreign key (i_id) references instructor ,
+constraint pk_IDs_ primary key(s_id),                       # Primary key 
+foreign key (s_id) references student,                      # Foreign key
+foreign key (i_id) references instructor                    # 2nd Foreign key
 );
 
 ```
@@ -330,4 +330,72 @@ WHERE NAME LIKE
     '%n_'                               # Specificly 2nd last charecter must be 'n'.
 ORDER BY
     Age;                                  # Sort by Age, assendring Order
+```
+
+
+## 'AS' keyword (give a temporary name toa column)
+Let's say, we have a column named 'Roll', now when showing the table we need to rename that column heading to 'ID'  
+
+```
+                                                      # AS key word, re-name the column heading
+SELECT
+    Roll AS ID, Name, Age, GPA                        # Show Roll column as ID ,Name ,Age and GPA columns
+FROM 
+    student_details                                   # from student_details table 
+ORDER BY
+    Age;                                              # Sort by Age, assendring Order
+
+output: ('ID' replasing 'ROLL')
+	ID 	Name 	      Age  	GPA 	
+	112 	Rahim17 	17 	3.15
+	121 	kahim 	17 	3.15
+ 	107 	Rahim4 	17 	3.15
+ 	104 	Rahim2 	17 	3.15
+ 	161 	Rahim9 	18 	3.15
+	106 	Nargis2 	18 	3.15
+ 	191 	Rahim11 	18 	3.15
+```
+### example 2 # Show Roll column as ID ,Name as 'first name' 
+```
+SELECT
+    Roll AS ID, Name AS 'First Name', Age, GPA        # Show Roll column as ID ,Name as 'first name' 
+FROM 
+    student_details                                   # from student_details table 
+ORDER BY
+    Age;                                              # Sort by Age, assendring Order
+
+```
+
+
+# constraints 
+
+## 1. NOT Null = must have data
+## 2. unique = must be unique data 
+## 3. primary key = must be unique and not null 
+## AUTO_INCREMENT = (++ put value)
+```
+                                    # create a table, named 'Teacher', specify a id column as Primary key
+                                    # AUTO_INCREMENT = (++ put value)
+create Table Teacher 
+(
+ID int NOT Null UNIQUE AUTO_INCREMENT,    # AUTO_INCREMENT will increase a value and put it in the place 
+Neme varchar(50) NOT Null,                   # name fild must have a value
+Salary double(10,2),                         # Salary field has no constraint, so it could be blank
+Primary KEY(ID)                              # Now specifing the ID column as primary key
+);
+```
+### Example 2: 
+```
+# create a table, named 'Teacher', specify a id column as Primary key
+# AUTO_INCREMENT = (++ put value)
+# specify a column, named "transactionID" as unique
+
+create Table Teacher 
+(
+ID int NOT Null UNIQUE AUTO_INCREMENT, # AUTO_INCREMENT will increase a value and put it in the place 
+Neme varchar(50) NOT Null,             # name fild must have a value
+TransactionID int UNIQUE,              # So, every value of Transaction ID must be unique 
+Salary double(10,2),                   # Salary field has no constraint, so it could be blank
+Primary KEY(ID)                        # Now specifing the ID column as primary key
+);
 ```

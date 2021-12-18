@@ -206,10 +206,62 @@ ORDER BY
 SELECT
     City,
     NAME,
-    Age                                   # Show City,Name ,Age columns
+    Age                                               # Show City,Name ,Age columns
 FROM
-    student_details                       # from student_details table 
+    student_details                                   # from student_details table 
 WHERE NAME LIKE
-    '%n_'                               # Specificly 2nd last charecter must be 'n'.
+    '%n_'                                             # Specificly 2nd last charecter must be 'n'.
 ORDER BY
-    Age;                                  # Sort by Age, assendring Order
+    Age;                                              # Sort by Age, assendring Order
+
+
+                                                      # AS key word, re-name the column heading
+SELECT
+    Roll AS ID, Name, Age, GPA                        # Show Roll column as ID ,Name ,Age and GPA columns
+FROM 
+    student_details                                   # from student_details table 
+ORDER BY
+    Age;                                              # Sort by Age, assendring Order
+
+
+
+SELECT
+    Roll AS ID, Name AS 'First Name', Age, GPA        # Show Roll column as ID ,Name as 'first name' 
+FROM 
+    student_details                                   # from student_details table 
+ORDER BY
+    Age;                                              # Sort by Age, assendring Order
+
+
+
+#######################################################constraints
+                                                           # 1. unique
+                                                           # 2. Not Null
+
+
+                                                           # create a table, named 'Teacher', specify a id column as Primary key
+                                                           # AUTO_INCREMENT = (++ put value)
+create Table Teacher 
+(
+      ID int NOT Null UNIQUE AUTO_INCREMENT,               # AUTO_INCREMENT will increase a value and put it in the place 
+      Neme varchar(50) NOT Null,                           # name fild must have a value
+      Salary double(10,2),                                 # Salary field has no constraint, so it could be blank
+      Primary KEY(ID)                                      # Now specifing the ID column as primary key
+);
+
+
+                                                           # create a table, named 'Teacher2', specify a id column as Primary key
+                                                           # AUTO_INCREMENT = (++ put value)
+                                                           # specify a column, named "transactionID" as unique
+
+CREATE TABLE Teacher2(
+    ID INT NOT NULL UNIQUE AUTO_INCREMENT,
+    # AUTO_INCREMENT will increase a value and put it in the place 
+    Neme VARCHAR(50) NOT NULL,
+    # name fild must have a value
+    TransactionID INT UNIQUE,
+    # So, every value of Transaction ID must be unique 
+    Salary DOUBLE(10, 2),
+    # Salary field has no constraint, so it could be blank
+    PRIMARY KEY(ID) # Now specifing the ID column as primary key
+);
