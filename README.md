@@ -125,7 +125,7 @@ FROM
 ### another use of LIMIT
 ```
                                                              # another use of LIMIT
-SELECT *                                                   
+SELECT                                             
 From student_details                                         # LIMIT how many of do not show from first, how many to show after that
 LIMIT 2,5;                                                   # do not show first 2 records, after that show 5 records
 ```
@@ -169,8 +169,17 @@ WHERE name = Midwest
 DELETE FROM <Table>
 Where<condition>
 ```
-
-
-
-
+### ORDER BY statement (sorting)
+Show "Name" column, by sorting it alphabetical assendring order.
+```
+SELECT Name                               # select Name column only 
+FROM student_details                      # from student table
+ORDER by Name;                            # order by name, by default it sorted as assendring order
+```
+Example 2:
+```
+SELECT Name, age                                             # select Name, Age column only 
+FROM student_details                                         # from student table
+ORDER by Age;                                                # order by Age, by default it sorted as assendring order
+```
 
