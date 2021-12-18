@@ -169,17 +169,50 @@ WHERE name = Midwest
 DELETE FROM <Table>
 Where<condition>
 ```
-### ORDER BY statement (sorting)
+## ORDER BY statement (sorting)
 Show "Name" column, by sorting it alphabetical assendring order.
 ```
 SELECT Name                               # select Name column only 
-FROM student_details                      # from student table
+FROM student_details                      # from student_details table
 ORDER by Name;                            # order by name, by default it sorted as assendring order
 ```
-Example 2:
+### Example 2:
 ```
 SELECT Name, age                                             # select Name, Age column only 
-FROM student_details                                         # from student table
+FROM student_details                                         # from student_details table
 ORDER by Age;                                                # order by Age, by default it sorted as assendring order
 ```
+### Example 3: decendring order
+```
+SELECT Name, age                                             # select Name, Age column only 
+FROM student_details                                         # from student_details table
+ORDER by Age DESC;                                           # order by Age, by default it sorted as assendring order , add 'DESC' for decendring order
+```
 
+## Where clauser
+```
+SELECT Column_list
+From TABLE_name
+WHERE condition;
+```
+### Example: select 'city' column FROM student_details Table, WHERE Gender='Female';
+```
+SELECT city FROM student_details                                
+WHERE Gender ="Female";                                      
+
+```
+### example 2
+```
+SELECT * FROM student_details                        # Show All the columns from student_details Table
+WHERE Gender ="Female";                              # if Gender = female
+```
+### example 3
+```
+SELECT * FROM student_details                        # Show All the columns from student_details table
+WHERE Age >18;                                       # if Gender > 18
+```
+### example of 2 conditions
+```
+SELECT * FROM student_details                       # Show All the columns from student_details table
+WHERE Age >18 and City='dhaka';                     # if ((Age>18) AND (City = 'Dhaka') 
+```

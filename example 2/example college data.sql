@@ -75,7 +75,6 @@ LIMIT 2,5;                                                   # do not show first
 
 
                                                              # Show "Name" column, by sorting it alphabetical assendring order.
-
 SELECT Name                                                  # select Name column only 
 FROM student_details                                         # from student table
 ORDER by Name;                                               # order by name, by default it sorted as assendring order
@@ -85,3 +84,16 @@ ORDER by Name;                                               # order by name, by
 SELECT Name,age                                              # select Name, Age column only 
 FROM student_details                                         # from student table
 ORDER by Age;                                                # order by Age, by default it sorted as assendring order
+
+
+                                                             # Where clauser
+SELECT * FROM student_details                                # Show All the columns from student_details table
+WHERE Gender ="Female";                                      # if Gender = female
+
+
+SELECT * FROM student_details                                # Show All the columns from student_details table
+WHERE Age >18;                                               # if Gender = 18
+
+
+SELECT * FROM student_details                                # Show All the columns from student_details table
+WHERE Age >18 and City='dhaka';                              # if ((Age>18) AND (City = 'Dhaka') 
