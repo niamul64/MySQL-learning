@@ -8,6 +8,7 @@ Relational database management system
 ### what is dbms:
 System that enables management of database including access monitor storage & manipulation of data in databases.
 ### example of RDBMS = MySql, oracle, PostGre, microsoft SQL Server
+### 1. WHERE .2 GROUP BY 3. ORDER
 
 <br>
 
@@ -67,6 +68,10 @@ USE <DATABASE_NAME>;
       City varchar(15),
       PRIMARY KEY (Roll) ## end of the line has no comma(,)
       );
+```
+## DESCRIBE
+```
+DESCRIBE Teacher2;                                          # DESCRIBE shows the structure of the table
 ```
 
 # Re-name
@@ -489,4 +494,177 @@ SELECT
     ) AS strNEW               # Naming that column as strNEW
 FROM
     student_details;
+```
+
+## GREATEST function (find greatest number among list of column)
+
+```
+# suppose:   Subject1| Subject2| Subject3| Subject4
+#               2           3       4           0
+
+Select *    
+GREATEST(Subject1, Subject2, Subject3, Subject4) AS Greatest_Mark
+FROM Student;
+
+# out put will be:
+# suppose:   Subject1| Subject2| Subject3| Subject4 | Greatest_Mark
+#               2           3       4           0           4
+```
+## MAX (column name) : only show the row that has max value
+```
+SELECT *,MAX(Age) as maxValue
+FROM student_details;
+```
+## Example 2
+```
+SELECT MAX(Price) AS LargestPrice
+FROM Products;
+```
+## MIN() : same as MAX()
+
+# TRUNCATE (value, digits want to show after '.');
+```
+select TRUNCATE(log(2),2)
+```
+# rand(); : genarates a random number
+# Exponencial:
+```
+select EXP(2)  ### exponential of 2
+```
+
+# Count(): will count the number of rows/ records in in the table
+```
+SELECT
+    COUNT(*)     # Will count number of records, return a number.
+FROM
+    student_details;
+```
+# SUM() and AVG(): example: show the sum and avg of all empolyee's salary, from Teacher table
+```
+SELECT
+    SUM(salary),
+    AVG(salary)
+FROM
+    teacher;
+```
+
+
+# show the row, if the person is female and got lowest GPA
+```
+SELECT *,
+    MIN(GPA)
+FROM
+    student_details
+WHERE
+    Gender = 'female';
+```
+
+
+
+# sub query
+### show all records who has the salary above or equals to the avarage salary of all employees.
+
+```
+SELECT
+    *                       # select all 
+FROM
+    teacher                 # from teacher table
+WHERE                       # condition starts
+        Salary >=(          # If Salary greater  than the (AVG salary of all employees)
+        SELECT          
+            AVG(Salary)     # AGARAGE value of all salary 
+        FROM                
+            teacher         # From teachers table
+			    )
+;
+```
+########################################################################################
+
+## ALTER TABLE command (add or delete column, change colmun heading in a table)
+
+### ADD
+```
+#Add new column
+ALTER TABLE 
+        Table_name
+ADD 
+        NEW_Column_Name DataType[size] constraints;
+
+# Example of add new column: add new column 'AGE' to teacher table
+                            # ALTER TABLE 
+ALTER TABLE                 # command to alter table
+    teacher                 # in the teacher table 
+ADD                         # add command
+	AGE INT(5);             # Add a column named 'AGE' and data type int
+```
+
+### RE-Name a colunm heading
+```
+#change column heading
+
+ALTER TABLE
+     Table_name
+CHANGE 
+     OLD_Column_Name 
+        New_Column_Name 
+            DataType[size];
+
+
+# Example of change column heading: from teacher table change the 'con' column name to unique_Value.
+
+                            # ALTER TABLE 
+                            
+ALTER TABLE                 # command to alter table
+    teacher                 # in the teacher table 
+CHANGE
+    con                     # previous column namevarchar(5);
+	unique_Value varchar(5);# New column name, data type can be changed
+```
+
+
+### DELETE a colunm 
+```
+#DELETE a colunm 
+
+ALTER TABLE
+     Table_name
+DROP COLUMN  
+     Column_Name;
+
+
+# Example of deleting column: Delete a column from teachers table named 'unique_Value'
+
+                            # ALTER TABLE 
+ALTER TABLE                 # command to alter table
+    teacher                 # in the teacher table 
+DROP COLUMN                 # delete column command, to delete multiple columns:'COLUMNS'
+	unique_Value;           # delete the column named: unique_Value
+```
+
+########################################################################################
+# GROUP BY CLOUSE 
+### 1. WHERE .2 GROUP BY 3. ORDER
+
+### EXAMPLE GROUP BY: 
+### SUPPOSE: WE HAVE A "teacher" table, with department name
+### Now find avarage salary, department wise 
+```
+SELECT 
+    Dept, AVG(Salary)  # show deptartment name, and bring avarage of salary
+FROM
+    teacher            # from teacher table
+GROUP by
+    Dept;              # group by Department name
+```
+
+### example 2: use 'Order By' with previous example 
+```
+SELECT 
+    Dept, AVG(Salary)           # show deptartment name, and bring avarage of salary
+FROM
+    teacher                     # from teacher table
+GROUP by
+    Dept                        # group by Department name
+ORDER BY        
+    AVG(Salary);                # orderby avarage salary
 ```

@@ -267,6 +267,10 @@ CREATE TABLE Teacher2(
 );
 
 
+
+DESCRIBE Teacher2;                                          # DESCRIBE shows the structure of the table
+
+
                                                             # insert some value to teacher table
 INSERT INTO teacher
       (ID, NAME, Salary)
@@ -328,7 +332,7 @@ FROM teacher;                             # from teacher table
                                           #Now we need to make a string structure and show as a column with other column. 
                                           #string structure: Student 'Name' is 'Age' years old.  
 SELECT
-    *,                                     # Show all column
+    *,                                    # Show all column
     CONCAT(
         'Student',
         NAME,
@@ -338,3 +342,96 @@ SELECT
     ) AS strNEW               # Naming that column as strNEW
 FROM
     student_details;
+
+
+
+
+                              # show the sum and avg of all empolyees salary, from Teacher table
+SELECT
+    SUM(salary),
+    AVG(salary)
+FROM
+    teacher;    
+    
+
+    
+                                # show the row, if the person is female and got lowest GPA 
+SELECT
+     *,                         # showing row
+    MIN(GPA)                    # finding min GPA
+FROM
+    student_details             # from student student_details table
+WHERE
+    Gender = 'female';          # Among female only
+
+
+
+
+                            # show all records who has the salary above or equals to the avarage salary of all employees.
+SELECT
+    *                       # select all 
+FROM
+    teacher                 # from teacher table
+WHERE                       # condition starts
+        Salary >=(          # If Salary greater  than the (AVG salary of all employees)
+        SELECT          
+            AVG(Salary)     # AGARAGE value of all salary 
+        FROM                
+            teacher         # From teachers table
+			    )
+;
+
+
+
+                            # ALTER TABLE 
+                            # Example of add new column: add new column 'AGE' to teacher table
+ALTER TABLE                 # command to alter table
+    teacher                 # in the teacher table 
+ADD                         # add command
+	AGE INT(5);             # Add a column named 'AGE' and data type int
+
+
+
+                            # Example of change column heading: from teacher table, change the 'con' column name to 'unique_Value'.
+                                # ALTER TABLE 
+                            
+ALTER TABLE                     # command to alter table
+    teacher                     # in the teacher table 
+CHANGE
+    con                         # previous column namevarchar(5);
+	unique_Value varchar(5);  	# New column name, data type can be changed
+
+
+
+                                # Example of deleting column: Delete a column from teachers table named 'unique_Value'
+                            # ALTER TABLE 
+ALTER TABLE                 # command to alter table
+    teacher                 # in the teacher table 
+DROP COLUMN                 # delete column command
+	unique_Value;           # delete the column named: unique_Value
+
+
+
+
+                                ### EXAMPLE GROUP BY: 
+                                ### SUPPOSE: WE HAVE A "teacher" table, with department name
+                                ### Now find department wise avarage salary  
+SELECT 
+    Dept, AVG(Salary)           # show deptartment name, and bring avarage of salary
+FROM
+    teacher                     # from teacher table
+GROUP by
+    Dept;                       # group by Department name
+
+
+
+
+                                ### example 2: use 'Order By' with previous example 
+SELECT 
+    Dept, AVG(Salary)           # show deptartment name, and bring avarage of salary
+FROM
+    teacher                     # from teacher table
+GROUP by
+    Dept                        # group by Department name
+ORDER BY        
+    AVG(Salary) DESC;           # orderby avarage salary in decendring order
