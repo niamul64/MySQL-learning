@@ -521,25 +521,37 @@ SELECT MAX(Price) AS LargestPrice
 FROM Products;
 ```
 ## MIN() : same as MAX()
+<br><br>
+####################
 
-# TRUNCATE (value, digits want to show after '.');
+## TRUNCATE (value, digits want to show after '.');
 ```
 select TRUNCATE(log(2),2)
 ```
-# rand(); : genarates a random number
-# Exponencial:
+## Another use of tuncate command (delete all the data from a table, but do not delete the table)
+## TRUNCATE TABLE
+```
+# example: delete all the records from student_details table.
+TRUNCATE TABLE student_details; # here all the records from student_details table will be deleted, but table will not be deleted
+
+```
+####################
+<br><br>
+
+## rand(); : genarates a random number
+## Exponencial:
 ```
 select EXP(2)  ### exponential of 2
 ```
 
-# Count(): will count the number of rows/ records in in the table
+## Count(): will count the number of rows/ records in in the table
 ```
 SELECT
     COUNT(*)     # Will count number of records, return a number.
 FROM
     student_details;
 ```
-# SUM() and AVG(): example: show the sum and avg of all empolyee's salary, from Teacher table
+## SUM() and AVG(): example: show the sum and avg of all empolyee's salary, from Teacher table
 ```
 SELECT
     SUM(salary),
@@ -547,9 +559,9 @@ SELECT
 FROM
     teacher;
 ```
+#####################################################################################
 
-
-# show the row, if the person is female and got lowest GPA
+## show the row, if the person is female and got lowest GPA
 ```
 SELECT *,
     MIN(GPA)
@@ -667,4 +679,168 @@ GROUP by
     Dept                        # group by Department name
 ORDER BY        
     AVG(Salary);                # orderby avarage salary
+```
+#################################################################
+## Joining table:
+######################## Now, joing table conditions
+### first, we need 2 tables with a common column.
+### lets have a 'student' table and 'Exam_result' table
+```
+CREATE TABLE student(
+    Roll INT NOT NULL,
+    Name varchar(20),
+    Gender varchar(20),
+    Age int,
+    Primary KEY(Roll)  
+                    );
+
+INSERT INTO student
+VALUES
+(0,'Rahim','Male',18),
+(1,'Faria','Female',17),
+(2,'Mahfuz','Male',18),
+(3,'Farjan','female',17),
+(4,'kahim','Male',18),
+(5,'saria','Female',17),
+(6,'Bahfuz','Male',18),
+(7,'Earjana','female',17);
+```
+   
+```
+CREATE TABLE exam_result(
+    Reg_number int NOT NULL,
+    Roll INT,
+    GPA double(3,2),
+    Group_Name varchar(20),
+    Primary KEY(Reg_number)  
+                        );
+
+INSERT INTO exam_result
+VALUES
+(20171,0,3.25,'Science'),
+(20172,1,3.44,'Arts'),
+(20173,2,4,'Science'),
+(20174,3,3.99,'Commerce');
+```
+
+## joing table:
+```
+
+# joing two tables. Now based on the roll we can join this two tables
+# we can specify the each column name, 
+# If two column name is same in 2 tables, then we need to specify by table_Name.column_Name 
+SELECT 
+    *                                  # Show all columns
+FROM 
+    student, exam_result               # from student table and exam_result table
+WHERE 
+    student.Roll= exam_result.Roll     # if the roll of two tables matches then combine
+;                   # if  we do not use the condition the the table columns were multiplied
+
+```
+
+# JOIN CLAUSE:
+```
+#structure
+SELECT
+    Column_names
+From 
+     1st_TAble_Name 
+        JOIN
+     2nd_table_name
+ON   
+     Condition;
+```
+
+### example 
+
+```
+SELECT 
+    *                                  # Show all columns
+FROM 
+    student JOIN exam_result           # from student table and exam_result table
+ON 
+    student.Roll= exam_result.Roll     # if the roll of two tables matches then combine
+;    
+```
+### OR we can write the same thing like this
+```
+                                       # By using JOIN CLAUSE
+SELECT 
+    std.roll,std.Name,std.age,Res.GPA  # Show specific columns
+FROM 
+    student as std 
+    JOIN 
+    exam_result as Res                  # from student table and exam_result table
+ON 
+    std.Roll= Res.Roll                  # if the roll of two tables matches then combine
+;    
+
+```
+# INNER JOIN: only show that columns by combining rows that have matching values in two by the condition.
+
+```
+SELECT 
+    *                                  # Show all columns
+FROM 
+    student INNER JOIN exam_result     # from student table and exam_result table, that matches the condition
+ON 
+    student.Roll= exam_result.Roll     # if the roll of two tables matches then combine
+;    
+```
+
+# LEFT JOIN:(left table main table) left side tables value all will shown, and right side table matched value combined. then rest of the value from right table will be NULL.
+# Right JOIN:(right table main table) Right side tables value all will shown, and left side table matched value combined. then rest of the value from left table will be NULL.
+
+
+#################################################################################
+## UNION (Removes Dublicate values), Union ALL (Keeps dublicate values)
+### here to tables must contain same columns.
+### suppose we have two tables, one contains the info of people who went to Dhaka tour and ### who went to shylet tour. combine these two table, need union operation.
+```
+    select 
+        Name, roll
+    from 
+        Dhaka_tour
+UNION 
+    select 
+        Name, roll
+    from 
+        Shylet_tour
+```
+
+
+#################################################################################
+## VIEW (vertual table) : A view is created with the 'CREATE VIEW' statement. 
+### In SQL, a view is a virtual table based on the result-set of an SQL statement.
+```
+# Structure
+CREATE VIEW 
+    view_name AS
+SELECT 
+    column1, column2, ...
+FROM
+    table_name
+WHERE 
+    condition; 
+```
+### example: create a view from student table, avoid the column 'AGE'
+```
+CREATE VIEW 
+    ST_view AS             # Giving the view name
+SELECT 
+    ROll, name, gender     # avoiding the age column 
+FROM
+    student;               # Creating view from student table
+```
+## NOW access the values from created view:
+```
+SELECT 
+    *
+FROM 
+    st_view;
+```
+### DELETE a view:
+```
+DROP VIEW <view_name>
 ```

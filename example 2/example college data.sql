@@ -435,3 +435,94 @@ GROUP by
     Dept                        # group by Department name
 ORDER BY        
     AVG(Salary) DESC;           # orderby avarage salary in decendring order
+
+
+                                # example: delete all the records from student_details table.
+TRUNCATE TABLE student_details; # here all the records from student_details table will be deleted, but table will not be deleted
+
+######################## Now, joing table conditions
+# first, we need 2 tables with a common column.
+
+# lets have a 'student' table and 'Exam_result' table
+
+CREATE TABLE student(
+    Roll INT NOT NULL,
+    Name varchar(20),
+    Gender varchar(20),
+    Age int,
+    Primary KEY(Roll)  
+                    );
+
+INSERT INTO student                 # inserting values/ records
+VALUES
+(0,'Rahim','Male',18),
+(1,'Faria','Female',17),
+(2,'Mahfuz','Male',18),
+(3,'Farjan','female',17);
+
+
+CREATE TABLE exam_result(
+    Reg_number int NOT NULL,
+    Roll INT,
+    GPA double(3,2),
+    Group_Name varchar(20),
+    Primary KEY(Reg_number)  
+                    );
+
+INSERT INTO exam_result                # inserting values/ records
+VALUES
+(20171,0,3.25,'Science'),
+(20172,1,3.44,'Arts'),
+(20173,2,4,'Science'),
+(20174,3,3.99,'Commerce');
+
+
+# joing two tables. Now based on the roll we can join this two tables
+
+SELECT 
+    *                                  # Show all columns, we can specify the each column name,# Show all columns, we can specify the each column name, but if two column name is same in 2 tables, then we need to specify by table_Name.column_name
+FROM 
+    student, exam_result               # from student table and exam_result table
+WHERE 
+    student.Roll= exam_result.Roll     # if the roll of two tables matches then combine
+;                                      # if  we do not use the condition the the table columns were multiplied 
+
+
+
+
+                                       # By using JOIN CLAUSE
+SELECT 
+    std.roll,std.Name,std.age,Res.GPA  # Show specific columns
+FROM 
+    student as std 
+    JOIN 
+    exam_result as Res                  # from student table and exam_result table
+ON 
+    std.Roll= Res.Roll                  # if the roll of two tables matches then combine
+;    
+
+
+
+SELECT                                 # By using INNER JOIN CLAUSE
+    *                                  # Show all columns
+FROM 
+    student INNER JOIN exam_result     # from student table and exam_result table, that matches the condition
+ON 
+    student.Roll= exam_result.Roll     # if the roll of two tables matches then combine
+;  
+
+
+                           # create a view from student table, avoid the column 'AGE'
+CREATE VIEW 
+    ST_view AS             # Giving the view name
+SELECT 
+    ROll, name, gender     # avoiding the age column 
+FROM
+    student;               # Creating view from student table
+
+
+                           # NOW access the values from created view
+SELECT 
+    *
+FROM 
+    st_view;
